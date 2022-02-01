@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
-var schema = new mongoose.Schema({
+const schema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -18,8 +18,6 @@ var schema = new mongoose.Schema({
     type: String,
     default: "active",
   },
-});
+})
 
-const clientModel = mongoose.model("clients", schema);
-
-module.exports = clientModel;
+module.exports = mongoose.model("clients", schema)
