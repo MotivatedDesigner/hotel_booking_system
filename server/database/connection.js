@@ -7,7 +7,7 @@ const connectDB = async () => {
         try {
           
           
-         await mongoose.connect('mongodb+srv://hamza:qsdf123456@cluster0.nxkva.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{
+         await mongoose.connect('mongodb://localhost:27017/hotel-booking',{
            useNewUrlParser:true,
            useUnifiedTopology:true
          });

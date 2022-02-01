@@ -19,7 +19,8 @@ app.use(morgan('tiny'));
 connectDB();
 
 // parse request to body-parser
-app.use(bodyparser.urlencoded({ extended : true}))
+app.use(express.json())
+// app.use(bodyparser.urlencoded({ extended : true}))
 
 // set view engine
 app.set("view engine", "ejs")
@@ -34,6 +35,6 @@ app.use('/js', express.static(path.resolve(__dirname, "assets/js")))
 
 
 // load routers
-app.use('/', require('./server/routes/router'))
+app.use('/api/users', require('./server/routes/client-router'))
 
 app.listen(PORT, ()=> { console.log(`Server is running on http://localhost:${PORT}`)});
