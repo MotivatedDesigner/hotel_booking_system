@@ -1,20 +1,20 @@
-var userModel = require("../model/client-model.js")
+var { clientModel } = require("../models")
 
-// create and save new user
-exports.create = async (req, res) => {
-  // validate request
+module.exports = {
+  create,
+}
+
+async function create(req, res) {
+
   if (!req.body)
     return res.status(422).send({ message: "Content can not be emtpy!" })
   
   const { password, confirmedPassword} = req.body
   if (password != confirmedPassword)
     return res.status(422).send({ message: "the password does not match the confirmed password" })
-  // other validations
 
-  // new user
   const user = new userModel(req.body)
 
-  // save user in the database
   await user
     .save(user)
     .catch((err) => {
