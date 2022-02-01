@@ -13,16 +13,15 @@ async function create(req, res) {
   if (password != confirmedPassword)
     return res.status(422).send({ message: "the password does not match the confirmed password" })
 
-  const user = new userModel(req.body)
-
-  await user
-    .save(user)
+  const user = await clientModel
+    .create(req.body)
     .catch((err) => {
-      res.status(500).send({
-        message:
-          err.message ||
-          "Some error occurred while creating a create operation",
-      })
+      // return res.status(500).send({
+      //   message:
+      //     err.message ||
+      //     "Some error occurred while creating a create operation",
+      // })
+      return console.log(err);
     })
   res.status(200).send(user)
 }
