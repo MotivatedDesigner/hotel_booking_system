@@ -1,40 +1,16 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const morgan = require('morgan');
-const bodyparser = require("body-parser");
-const path = require('path');
+const express = require('express')
 
-const connectDB = require('./server/database/connection');
+const { userRouter } = require('./app/routes')
 
-const app = express();
-
-dotenv.config( { path : 'config.env'} )
-const PORT = process.env.PORT || 3000
-
-
-// log requests
-app.use(morgan('tiny'));
+const app = express()
 
 // mongodb connection
-connectDB();
+require('./app/database')()
 
 // parse request to body-parser
 app.use(express.json())
-// app.use(bodyparser.urlencoded({ extended : true}))
 
-// set view engine
-app.set("view engine", "ejs")
-//app.set("views", path.resolve(__dirname, "views/ejs"))
+// routers
+app.use('/api/users', userRouter)
 
-// load assets
-app.use('/css', express.static(path.resolve(__dirname, "assets/css")))
-app.use('/img', express.static(path.resolve(__dirname, "assets/img")))
-app.use('/js', express.static(path.resolve(__dirname, "assets/js")))
-
-
-
-
-// load routers
-app.use('/api/users', require('./server/routes/client-router'))
-
-app.listen(PORT, ()=> { console.log(`Server is running on http://localhost:${PORT}`)});
+app.listen(3000, ()=> console.log('Server is running on http://localhost:3000') )
