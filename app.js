@@ -7,7 +7,6 @@ const app = express()
 // mongodb connection
 require('./app/database')()
 
-// parse request to body-parser
 app.use(express.json())
 
 // routers

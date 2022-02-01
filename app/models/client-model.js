@@ -19,7 +19,7 @@ const schema = new mongoose.Schema({
     match: [/^(?=.*\d).*/, 'password must include at least one number'],
     match: [/^(?=.*[a-z]).*$/, 'password must include at least one lowercase charachter'],
     match: [/^(?=.*[A-Z]).*$/, 'password must include at least one uppercase charachter'],
-    match: [/^(?=.*\W).*$/, 'password must include at least one symbol like (!,%,$,£,@,...)'],
+    match: [/^(?=.*\W).*$/, 'password must include at least one symbol like (!,%,$,£,@,...)']
   },
   status: {
     type: String,

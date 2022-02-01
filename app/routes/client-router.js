@@ -7,6 +7,6 @@ const { clientController } = require('../controllers')
 route.post('/', clientController.create)
 // route.get('/', clientController.find)
 // route.put('/:id', clientController.update)
-// route.delete('/:id', clientController.delete)
+route.delete('/:id', clientController.remove)
 
 module.exports = route

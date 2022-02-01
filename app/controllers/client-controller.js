@@ -2,6 +2,7 @@ var { clientModel } = require("../models")
 
 module.exports = {
   create,
+  remove
 }
 
 async function create(req, res) {
@@ -26,7 +27,6 @@ async function create(req, res) {
   res.status(200).send(user)
 }
 
-// retrieve and return all users/ retrive and return a single user
 exports.find = (req, res) => {
   if (req.query.id) {
     const id = req.query.id
@@ -58,7 +58,6 @@ exports.find = (req, res) => {
   }
 }
 
-// Update a new idetified user by user id
 exports.update = (req, res) => {
   if (!req.body) {
     return res.status(400).send({ message: "Data to update can not be empty" })
@@ -82,25 +81,17 @@ exports.update = (req, res) => {
     })
 }
 
-// Delete a user with specified user id in the request
-exports.delete = (req, res) => {
-  const id = req.params.id
+async function remove(req, res) {
+  const { id } = req.params
 
-  Userdb.findByIdAndDelete(id)
-    .then((data) => {
-      if (!data) {
-        res
-          .status(404)
-          .send({ message: `Cannot Delete with id ${id}. Maybe id is wrong` })
-      } else {
-        res.send({
-          message: "User was deleted successfully!",
-        })
-      }
-    })
+  const user = await clientModel
+    .findByIdAndDelete(id)
     .catch((err) => {
-      res.status(500).send({
-        message: "Could not delete User with id=" + id,
-      })
+      return res.status(500).send({ message: "Could not delete User with id:" + id })
     })
+
+  if(!user)
+    return res.status(500).send({ message: "Could not find User with id:" + id })
+
+  res.status(200).send({ message: user })
 }
