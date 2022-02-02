@@ -48,15 +48,13 @@ async function get(req, res) {
   
   clientModel
     .findById(id)
-    .then((data) => {
-      if (!data)
+    .then( client => {
+      if (!client)
         res.status(404).send({ message: "Not found user with id " + id })
       else
-        res.json(data)
+        res.json(client)
     })
-    .catch((err) => {
-      res.status(500).send({ message: "Erro retrieving user with id " + id })
-    })
+    .catch( err => res.status(500).send({ message: "Erro retrieving user with id " + id }) )
 }
 
 async function update(req, res) {
