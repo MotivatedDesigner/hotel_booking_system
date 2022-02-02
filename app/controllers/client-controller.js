@@ -84,14 +84,13 @@ async function update(req, res) {
 async function remove(req, res) {
   const { id } = req.params
 
-  const client = await clientModel
+  clientModel
     .findByIdAndDelete(id)
-    .catch((err) => {
-      return res.status(500).send({ message: "Could not delete client with id:" + id })
+    .then( client => {
+      if(!client)
+        return res.status(500).send({ message: "Could not find client with id:" + id })
+
+      res.status(200).send(client)
     })
-
-  if(!client)
-    return res.status(500).send({ message: "Could not find client with id:" + id })
-
-  res.status(200).send(client)
+    .catch( err => res.status(500).send({ message: "Could not delete client with id:" + id }))
 }
