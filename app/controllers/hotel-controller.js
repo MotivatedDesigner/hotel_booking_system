@@ -5,7 +5,7 @@ module.exports = {
   getAll,
   create,
   update,
-  // remove
+  remove
 }
 
 async function get(req, res) {
@@ -36,14 +36,9 @@ async function update(req, res) {
   } catch (error) { res.send(error) }
 }
 
-/*
-
-
-const deleteHotel = async (req, res) => {
+async function remove(req, res) {
   try {
-    await Hotel.deleteOne({ _id: req.params.id })
+    await hotelModel.findByIdAndDelete(req.params.id)
     res.send("is deleted")
-  } catch (error) {
-    res.send(error)
-  }
-} */
+  } catch (error) { res.send(error) }
+}
