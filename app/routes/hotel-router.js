@@ -1,10 +1,11 @@
-const hotelRouter = require("express").Router()
-const  { createHotel, updateHotel,readAllHotel,deleteHotel,readHotel ,verifyToken } = require("../controller/hotelController")
+const route = require("express").Router()
 
-hotelRouter.post("/createHotel", createHotel);
-hotelRouter.post("/updateHotel/:id", updateHotel);
-hotelRouter.get("/readAllHotel", readAllHotel);
-hotelRouter.get("/readHotel/:id", readHotel);
-hotelRouter.delete("/deleteHotel/:id", deleteHotel);
+const { hotelController } = require("../controllers")
 
-module.exports = hotelRouter;
+route.get("/", hotelController.getAll);
+route.get("/:id", hotelController.get);
+route.post("/", hotelController.create);
+route.post("/:id", hotelController.update);
+route.delete("/:id", hotelController.remove);
+
+module.exports = route;
