@@ -67,7 +67,7 @@ async function update(req, res) {
   const { id } = req.params
 
   clientModel
-    .findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    .findByIdAndUpdate(id, req.body, { useFindAndModify: false , new: true})
     .then( client => {
       if(!client)
         return res.status(422).send({ message: "Could not find client with id: " + id })
