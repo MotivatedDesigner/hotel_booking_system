@@ -2,7 +2,8 @@ var { clientModel } = require("../models")
 
 module.exports = {
   create,
-  remove
+  remove,
+  update
 }
 
 async function create(req, res) {
@@ -14,7 +15,7 @@ async function create(req, res) {
   if (password != confirmedPassword)
     return res.status(422).send({ message: "the password does not match the confirmed password" })
 
-  const user = await clientModel
+  const client = await clientModel
     .create(req.body)
     .catch((err) => {
       // return res.status(500).send({
@@ -24,7 +25,7 @@ async function create(req, res) {
       // })
       return console.log(err);
     })
-  res.status(200).send(user)
+  res.status(200).send(client)
 }
 
 exports.find = (req, res) => {
@@ -58,40 +59,36 @@ exports.find = (req, res) => {
   }
 }
 
-exports.update = (req, res) => {
-  if (!req.body) {
-    return res.status(400).send({ message: "Data to update can not be empty" })
-  }
+async function update(req, res) {
+  if ( req.body 
+    && Object.getPrototypeOf(req.body)
+    && Object.keys(req.body).length === 0
+  )
+    return res.status(422).send({ message: "request body is malformed or empty" })
 
-  const id = req.params.id
-  Userdb.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
-    .then((data) => {
-      if (!data) {
-        res
-          .status(404)
-          .send({
-            message: `Cannot Update user with ${id}. Maybe user not found!`,
-          })
-      } else {
-        res.send(data)
-      }
-    })
+  const { id } = req.params
+  const client = await clientModel
+    .findByIdAndUpdate(id, req.body, { useFindAndModify: false })
     .catch((err) => {
-      res.status(500).send({ message: "Error Update user information" })
+      return res.status(500).send({ message: "Could not update client with this id: " + id })
     })
+    
+  if(!client)
+    return res.status(422).send({ message: "Could not find client with id: " + id })
+  res.send(client)
 }
 
 async function remove(req, res) {
   const { id } = req.params
 
-  const user = await clientModel
+  const client = await clientModel
     .findByIdAndDelete(id)
     .catch((err) => {
-      return res.status(500).send({ message: "Could not delete User with id:" + id })
+      return res.status(500).send({ message: "Could not delete client with id:" + id })
     })
 
-  if(!user)
-    return res.status(500).send({ message: "Could not find User with id:" + id })
+  if(!client)
+    return res.status(500).send({ message: "Could not find client with id:" + id })
 
-  res.status(200).send({ message: user })
+  res.status(200).send(client)
 }
