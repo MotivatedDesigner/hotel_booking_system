@@ -2,7 +2,7 @@ const { hotelModel } = require("../models")
 
 module.exports = {
   get,
-  // getAll,
+  getAll,
   create,
   // update,
   // remove
@@ -11,6 +11,13 @@ module.exports = {
 async function get(req, res) {
   try {
     const hotel = await hotelModel.findById(req.params.id)
+    res.send(hotel)
+  } catch (error) { res.send(error) }
+}
+
+async function getAll(_, res) {
+  try {
+    const hotel = await hotelModel.find()
     res.send(hotel)
   } catch (error) { res.send(error) }
 }
@@ -32,14 +39,7 @@ const updateHotel = async (req, res) => {
     res.send(error)
   }
 }
-const readAllHotel = async (req, res) => {
-  try {
-    const hotel = await Hotel.find({})
-    res.send(hotel)
-  } catch (error) {
-    res.send(error)
-  }
-}
+
 
 const deleteHotel = async (req, res) => {
   try {
