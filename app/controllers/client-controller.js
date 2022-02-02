@@ -33,7 +33,7 @@ async function create(req, res) {
 async function getAll(req, res) {
   const clients = await clientModel
     .find()
-    .then((user) => res.send(user) )
+    .then( users => res.send(users) )
     .catch((err) => {
       res
         .status(500)
