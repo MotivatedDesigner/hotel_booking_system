@@ -4,7 +4,7 @@ module.exports = {
   get,
   getAll,
   create,
-  // update,
+  update,
   // remove
 }
 
@@ -29,16 +29,14 @@ async function create(req, res) {
   } catch (error) { res.send(error) }
 }
 
-/*
-const updateHotel = async (req, res) => {
+async function update(req, res) {
   try {
-    await Hotel.findOneAndUpdate({ _id: req.params.id }, req.body)
-    const hotel = await Hotel.find({ _id: req.params.id })
+    const hotel = await hotelModel.findOneAndUpdate({ _id: req.params.id }, req.body, {new: true})
     res.send(hotel)
-  } catch (error) {
-    res.send(error)
-  }
+  } catch (error) { res.send(error) }
 }
+
+/*
 
 
 const deleteHotel = async (req, res) => {
