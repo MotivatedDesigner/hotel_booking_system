@@ -3,7 +3,7 @@ const { hotelModel } = require("../models")
 module.exports = {
   get,
   // getAll,
-  // create,
+  create,
   // update,
   // remove
 }
@@ -15,14 +15,14 @@ async function get(req, res) {
   } catch (error) { res.send(error) }
 }
 
-/* const createHotel = async (req, res) => {
+async function create(req, res) {
   try {
-    const hotel = await Hotel.create(req.body)
+    const hotel = await hotelModel.create(req.body)
     res.send(hotel)
-  } catch (error) {
-    res.send(error)
-  }
+  } catch (error) { res.send(error) }
 }
+
+/*
 const updateHotel = async (req, res) => {
   try {
     await Hotel.findOneAndUpdate({ _id: req.params.id }, req.body)
