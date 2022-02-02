@@ -3,7 +3,9 @@ var { clientModel } = require("../models")
 module.exports = {
   create,
   remove,
-  update
+  update,
+  get,
+  getAll
 }
 
 async function create(req, res) {
@@ -28,35 +30,34 @@ async function create(req, res) {
   res.status(200).send(client)
 }
 
-exports.find = (req, res) => {
-  if (req.query.id) {
-    const id = req.query.id
+async function getAll(req, res) {
+  const clients = await clientModel
+    .find()
+    .then((user) => res.send(user) )
+    .catch((err) => {
+      res
+        .status(500)
+        .send({
+          message:
+            err.message || "Error Occurred while retriving user information",
+        })
+    })
+}
 
-    Userdb.findById(id)
-      .then((data) => {
-        if (!data) {
-          res.status(404).send({ message: "Not found user with id " + id })
-        } else {
-          res.send(data)
-        }
-      })
-      .catch((err) => {
-        res.status(500).send({ message: "Erro retrieving user with id " + id })
-      })
-  } else {
-    Userdb.find()
-      .then((user) => {
-        res.send(user)
-      })
-      .catch((err) => {
-        res
-          .status(500)
-          .send({
-            message:
-              err.message || "Error Occurred while retriving user information",
-          })
-      })
-  }
+async function get(req, res) {
+  const { id } = req.params
+  
+  clientModel
+    .findById(id)
+    .then((data) => {
+      if (!data)
+        res.status(404).send({ message: "Not found user with id " + id })
+      else
+        res.json(data)
+    })
+    .catch((err) => {
+      res.status(500).send({ message: "Erro retrieving user with id " + id })
+    })
 }
 
 async function update(req, res) {

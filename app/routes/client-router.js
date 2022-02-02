@@ -5,7 +5,8 @@ const { clientController } = require('../controllers')
 
 // API
 route.post('/', clientController.create)
-// route.get('/:id', clientController.getOne)
+route.get('/', clientController.getAll)
+route.get('/:id', clientController.get)
 route.patch('/:id', clientController.update)
 route.delete('/:id', clientController.remove) 
 
