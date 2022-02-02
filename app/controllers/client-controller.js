@@ -9,9 +9,8 @@ module.exports = {
 }
 
 async function create(req, res) {
-
-  if (!req.body)
-    return res.status(422).send({ message: "Content can not be emtpy!" })
+  if ( req.body && Object.getPrototypeOf(req.body) && Object.keys(req.body).length === 0 )
+    return res.status(422).send({ message: "request body is malformed or empty" })
   
   const { password, confirmedPassword} = req.body
   if (password != confirmedPassword)
