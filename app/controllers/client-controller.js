@@ -68,15 +68,17 @@ async function update(req, res) {
     return res.status(422).send({ message: "request body is malformed or empty" })
 
   const { id } = req.params
-  const client = await clientModel
+
+  clientModel
     .findByIdAndUpdate(id, req.body, { useFindAndModify: false })
-    .catch((err) => {
-      return res.status(500).send({ message: "Could not update client with this id: " + id })
+    .then( client => {
+      if(!client)
+        return res.status(422).send({ message: "Could not find client with id: " + id })
+      res.send(client)
     })
+    .catch( err => res.status(500).send({ message: "Could not update client with this id: " + id }))
     
-  if(!client)
-    return res.status(422).send({ message: "Could not find client with id: " + id })
-  res.send(client)
+  
 }
 
 async function remove(req, res) {
