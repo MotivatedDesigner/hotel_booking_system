@@ -31,7 +31,7 @@ const hotelSchema = mongoose.Schema(
     //   maxlength: [100, "stars must be less than 100 charachter"],
     // },
     image: String,
-    hotel_id: {
+    user_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'users'
   }
