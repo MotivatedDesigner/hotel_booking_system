@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
-const Reservation = mongoose.model(
+module.exports = mongoose.model(
   "reservations",
   new mongoose.Schema({
     client: {
@@ -25,25 +25,4 @@ const Reservation = mongoose.model(
       }
     },
   })
-);
-
-async function createReservation(
-  hotelname,
-  roomnumber,
-  paimentmethode,
-  customer
-) {
-  const reservation = Reservation({
-    hotelname,
-    roomnumber,
-    paimentmethode,
-    customer,
-  });
-  const result = await reservation.save();
-  console.log(result);
-}
-
-async function getReservation() {
-  const reservation = await Reservation.find();
-  console.log(reservation);
-}
+)
