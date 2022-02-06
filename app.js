@@ -1,6 +1,6 @@
 const express = require('express')
 
-const { clientRouter, hotelRouter } = require('./app/routes')
+const { userRouter, hotelRouter } = require('./app/routes')
 
 const app = express()
 
@@ -10,7 +10,7 @@ require('./app/database')()
 app.use(express.json())
 
 // routers
-app.use('/api/users', clientRouter)
+app.use('/api/users', userRouter)
 app.use('/api/hotels', hotelRouter)
 
 

@@ -1,4 +1,4 @@
-var { clientModel } = require("../models")
+var { userModel } = require("../models")
 
 module.exports = {
   create,
@@ -16,7 +16,7 @@ async function create(req, res) {
   if (password != confirmedPassword)
     return res.status(422).send({ message: "the password does not match the confirmed password" })
 
-  const client = await clientModel
+  const client = await userModel
     .create(req.body)
     .catch((err) => {
       // return res.status(500).send({
@@ -30,7 +30,7 @@ async function create(req, res) {
 }
 
 async function getAll(req, res) {
-  const clients = await clientModel
+  const clients = await userModel
     .find()
     .then( users => res.send(users) )
     .catch((err) => {
@@ -46,7 +46,7 @@ async function getAll(req, res) {
 async function get(req, res) {
   const { id } = req.params
   
-  clientModel
+  userModel
     .findById(id)
     .then( client => {
       if (!client)
@@ -66,7 +66,7 @@ async function update(req, res) {
 
   const { id } = req.params
 
-  clientModel
+  userModel
     .findByIdAndUpdate(id, req.body, { useFindAndModify: false , new: true})
     .then( client => {
       if(!client)
@@ -81,7 +81,7 @@ async function update(req, res) {
 async function remove(req, res) {
   const { id } = req.params
 
-  clientModel
+  userModel
     .findByIdAndDelete(id)
     .then( client => {
       if(!client)

@@ -1,7 +1,7 @@
-const clientController = require('./client-controller')
+const userController = require('./user-controller')
 const hotelController = require('./hotel-controller')
 
 module.exports = {
   hotelController,
-  clientController,
+  userController,
 }
