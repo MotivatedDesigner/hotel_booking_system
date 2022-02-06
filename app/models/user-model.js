@@ -21,9 +21,9 @@ const schema = new mongoose.Schema({
     match: [/^(?=.*[A-Z]).*$/, 'password must include at least one uppercase charachter'],
     match: [/^(?=.*\W).*$/, 'password must include at least one symbol like (!,%,$,£,@,...)']
   },
-  status: {
-    type: String,
-    default: "active",
+  isActive: {
+    type: Boolean,
+    default: true,
   },
 })
 
