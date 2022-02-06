@@ -24,5 +24,13 @@ module.exports = mongoose.model(
         message: 'Unsupported payment method'
       }
     },
-  })
+    startDate: {
+      type: Date,
+      required: [true, 'u must provide a valid reservation starting date']
+    },
+    endDate: {
+      type: Date,
+      required: [true, 'u must provide a valid reservation ending date']
+    }
+  }, { timestamps: true })
 )
