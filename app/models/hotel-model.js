@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
-const hotelSchema = mongoose.Schema(
-  {
+module.exports = mongoose.model(
+  "hotels",
+  new mongoose.Schema({
     name: {
       type: String,
       required: [true, "the name field is required"],
@@ -35,8 +36,5 @@ const hotelSchema = mongoose.Schema(
     //   required: true,
     //   min: 8,
     // },
-  },
-  { timestamps: true }
-);
-
-module.exports = mongoose.model("hotels", hotelSchema);
+  }, { timestamps: true })
+)
