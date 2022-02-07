@@ -18,7 +18,7 @@ module.exports = mongoose.model(
         required: [true, "the price field is required"],
         maxlength: [6, "price must be less than 6 charachter"],
       },
-      images: [String],
+      // images: [String],
       hotel: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'hotels'

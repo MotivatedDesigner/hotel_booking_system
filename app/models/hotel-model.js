@@ -9,6 +9,10 @@ module.exports = mongoose.model(
       minlength: [3, "name must be greater than 3 charachter"],
       maxlength: [24, "name must be less than 24 charachter"],
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'users'
+    },
     city: {
       type: String,
       required: [true, "the city field is required"],
