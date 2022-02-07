@@ -1,13 +1,14 @@
 const express = require('express')
-
+const formidable = require('express-formidable')
 const { clientRouter, hotelRouter } = require('./app/routes')
 
 const app = express()
 
 // mongodb connection
 require('./app/database')()
-
 app.use(express.json())
+// app.use(formidable())
+// app.use(express.urlencoded({ extended: false }))
 
 // routers
 app.use('/api/users', clientRouter)
