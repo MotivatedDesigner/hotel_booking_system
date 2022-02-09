@@ -30,11 +30,10 @@ const hotelSchema = mongoose.Schema(
       required: [true, "the stars field is required"],
       maxlength: [100, "stars must be less than 100 charachter"],
     },
-    image: {
+    image: [{
       type: String,
       required: true,
-      min: 8,
-    },
+    }],
   },
   { timestamps: true }
 );

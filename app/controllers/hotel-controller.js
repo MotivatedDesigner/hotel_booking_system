@@ -24,6 +24,10 @@ async function getAll(_, res) {
 
 async function create(req, res) {
   try {
+    // return res.send(req.file)
+    req.body.image = req.files.map((file) => {
+      return file.filename
+    })
     const hotel = await hotelModel.create(req.body)
     res.send(hotel)
   } catch (error) { res.send(error) }
