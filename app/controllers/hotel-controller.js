@@ -5,7 +5,10 @@ module.exports = {
   getAll,
   create,
   update,
-  remove
+  remove,
+  annonce,
+  findByNameAndType
+
 }
 
 async function get(req, res) {
@@ -40,5 +43,18 @@ async function remove(req, res) {
   try {
     await hotelModel.findByIdAndDelete(req.params.id)
     res.send("is deleted")
+  } catch (error) { res.send(error) }
+}
+
+async function annonce(req, res) {
+  try {
+    const hotel = await hotelModel.find().populate({path:"rooms",  match: { available: true}, select: 'type price'})
+    res.send(hotel)
+  } catch (error) { res.send(error) }
+}
+async function findByNameAndType(req, res) {
+  try {
+    const hotel = await hotelModel.find({name: req.body.name}).populate({path:"rooms",  match: { type: req.body.type}})
+    res.send(hotel)
   } catch (error) { res.send(error) }
 }

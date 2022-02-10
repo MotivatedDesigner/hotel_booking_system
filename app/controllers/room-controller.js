@@ -5,7 +5,9 @@ module.exports = {
   getAll,
   create,
   update,
-  remove
+  remove,
+  disponible
+
 }
 
 async function get(req, res) {
@@ -41,4 +43,39 @@ async function remove(req, res) {
     await roomModel.findByIdAndDelete(req.params.id)
     res.send("is deleted")
   } catch (error) { res.send(error) }
+}
+
+
+async function disponible(req, res) {
+  try {
+    const room = await roomModel.find().populate("reserve" , null, 
+          // { date_from: { $gt: req.body.date_from ,$gt: req.body.date_to} },
+  )
+    res.send(room)
+  } catch (error) { res.send(error) }
+}
+
+
+
+
+
+
+async function reserve(req,res) {
+  const data = await roomModel.find({
+      // $not: {
+          $or: [
+              {
+                  $and: [
+                      { date_from: { $gt: req.body.date_from } },
+                      { date_from: { $gt: req.body.date_to } }
+                  ]
+              },
+              {
+                  date_to: { $lt: req.body.date_from  },
+              }
+          ]
+      // }
+      // $gt > | $lt <
+  })
+  res.send(data);
 }
