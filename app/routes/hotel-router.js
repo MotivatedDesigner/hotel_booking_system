@@ -1,5 +1,5 @@
 const route = require("express").Router()
-const upload = require("../middleware/uploadPhotos")
+const upload = require("../middlewares/uploadPhotos")
 const { hotelController } = require("../controllers")
 
 route.get("/", hotelController.getAll);

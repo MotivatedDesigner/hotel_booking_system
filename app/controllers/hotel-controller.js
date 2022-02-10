@@ -15,9 +15,13 @@ async function get(req, res) {
   } catch (error) { res.send(error) }
 }
 
-async function getAll(_, res) {
+async function getAll(req, res) {
+  const filter = {}
+  if(req.query.city)   filter.city = req.query.city
+  if(req.query.stars)   filter.stars = req.query.stars
+  
   try {
-    const hotel = await hotelModel.find()
+    const hotel = await hotelModel.find(filter)
     res.send(hotel)
   } catch (error) { res.send(error) }
 }
