@@ -5,7 +5,7 @@ const roomSchema = mongoose.Schema(
     type: {
       type: String,
       required: [true, "the type field is required"],
-      enum: ["Single", "Double" , "Triple","Suite"],
+      enum: ["Single", "Double", "Triple","Suite"],
       validate: {
         validator: (value) => ["Single", "Double" , "Triple", "Suite"].includes(value),
         message: 'Invalid room type'
@@ -16,7 +16,10 @@ const roomSchema = mongoose.Schema(
       required: [true, "the price field is required"],
       maxlength: [100, "price must be less than 100 charachter"],
     },
-    // image: [String],
+    image: [{
+      type: String,
+      required: true,
+    }],
     hotel: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'hotels'

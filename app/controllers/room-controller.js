@@ -17,15 +17,24 @@ async function get(req, res) {
   } catch (error) { res.send(error) }
 }
 
-async function getAll(_, res) {
+async function getAll(req, res) {
+
+  const filter = {}
+  if(req.query.city)   filter.city = req.query.city
+  if(req.query.stars)   filter.stars = req.query.stars
+  if(req.query.type)   filter.type = req.query.type
+
   try {
-    const room = await roomModel.find()
+    const room = await roomModel.find(filter)
     res.send(room)
   } catch (error) { res.send(error) }
 }
 
 async function create(req, res) {
   try {
+    req.body.image = req.files.map((file) => {
+      return file.filename
+    })
     const room = await roomModel.create(req.body)
     res.send(room)
   } catch (error) { res.send(error) }
