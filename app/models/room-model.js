@@ -16,7 +16,10 @@ const roomSchema = mongoose.Schema(
       required: [true, "the price field is required"],
       maxlength: [100, "price must be less than 100 charachter"],
     },
-    // image: [String],
+    image: [{
+      type: String,
+      required: true,
+    }],
     hotel: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'hotels'
@@ -24,13 +27,6 @@ const roomSchema = mongoose.Schema(
   },
   { timestamps: true }
 );
-roomSchema.virtual('reserve', {
-  ref: 'reserves', 
-  localField: '_id', 
-  foreignField: 'room', 
-});
 
-roomSchema.set('toObject', { virtuals: true });
-roomSchema.set('toJSON', { virtuals: true });
 
 module.exports = mongoose.model("rooms", roomSchema);

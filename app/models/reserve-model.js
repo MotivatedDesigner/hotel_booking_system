@@ -15,6 +15,10 @@ const reserveSchema = mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: 'rooms'
     },
+    client: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users'
+    },
     date_from: Number,
     date_to: Number,
 

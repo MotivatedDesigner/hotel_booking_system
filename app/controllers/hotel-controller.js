@@ -27,6 +27,9 @@ async function getAll(_, res) {
 
 async function create(req, res) {
   try {
+    req.body.image = req.files.map((file) => {
+      return file.filename
+    })
     const hotel = await hotelModel.create(req.body)
     res.send(hotel)
   } catch (error) { res.send(error) }
@@ -48,13 +51,89 @@ async function remove(req, res) {
 
 async function annonce(req, res) {
   try {
-    const hotel = await hotelModel.find().populate({path:"rooms",  match: { available: true}, select: 'type price'})
+    const hotel = await hotelModel.aggregate([
+      {
+        $lookup: {
+          from: "rooms",
+          localField: "_id",
+          foreignField: "hotel",
+          as: "room",
+          let :{roomId : "$_id"},
+          pipeline: [
+            { $match:
+               { $expr: 
+                       { $eq: [ "$hotel",  "$$roomId" ] },
+               }
+            },
+            {
+              $lookup: {
+                from: "reserves",
+                localField: "_id",
+                foreignField: "room",
+                as: "reserve",
+                let :{reserveId : "$_id"},
+                pipeline: [
+                  { $match:
+                     { $expr:
+                             { $eq: [ "$room",  "$$reserveId" ]},
+                     }
+                  },
+                ]
+              }
+            },
+            {
+              $match: {
+                "reserve.room": {
+                  $exists: false
+                }
+              }
+            },
+         ],
+        }, 
+      },
+      {
+        $match: {
+          "room.hotel": {
+            $exists: true
+          }
+        }
+      },
+   
+    ])
+    // const hotel = await hotelModel.find().populate({path:"rooms",  match: { available: true}, select: 'type price '})
     res.send(hotel)
   } catch (error) { res.send(error) }
 }
 async function findByNameAndType(req, res) {
   try {
-    const hotel = await hotelModel.find({name: req.body.name}).populate({path:"rooms",  match: { type: req.body.type}})
+    const hotel = await hotelModel.aggregate([
+      {
+        $lookup: {
+          from: "rooms",
+          localField: "_id",
+          foreignField: "hotel",
+          as: "room",
+          pipeline: [
+            { $match:
+               { $expr:
+                       { $eq: [ "$type",  req.body.type ]},
+               }
+            },
+            { $project: { _id: 0 } },
+          ]
+      
+        },
+  
+      },
+      { $project: { _id: 0 } },
+      {
+        $match: {
+          "name" :req.body.name  ,
+          "room.type" :{ $exists: true}
+        }
+      },
+    ])
+    // const hotel = await hotelModel.find({$text: { $search : req.body.name}}).populate({path:"rooms",  match: { type: req.body.type}})
     res.send(hotel)
   } catch (error) { res.send(error) }
 }

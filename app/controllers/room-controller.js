@@ -26,6 +26,9 @@ async function getAll(_, res) {
 
 async function create(req, res) {
   try {
+    req.body.image = req.files.map((file) => {
+      return file.filename
+    })
     const room = await roomModel.create(req.body)
     res.send(room)
   } catch (error) { res.send(error) }
@@ -48,34 +51,33 @@ async function remove(req, res) {
 
 async function disponible(req, res) {
   try {
-    const room = await roomModel.find().populate("reserve" , null, 
-          // { date_from: { $gt: req.body.date_from ,$gt: req.body.date_to} },
-  )
+  const room = await roomModel.aggregate([
+    {
+      $lookup: {
+        from: "reserves",
+        localField: "_id",
+        foreignField: "room",
+        as: "reserve",
+      },
+
+    },
+    {
+      $match: {
+        $or: [{
+        "reserve.date_from": 
+        { $gt: req.body.date_from, $gt: req.body.date_to }
+      },
+        {"reserve.date_to": { $lt: req.body.date_from}
+      },
+        { "reserve.room": {
+            $exists: false
+          }}
+        ]
+      }
+    },
+  ])
     res.send(room)
   } catch (error) { res.send(error) }
 }
 
 
-
-
-
-
-async function reserve(req,res) {
-  const data = await roomModel.find({
-      // $not: {
-          $or: [
-              {
-                  $and: [
-                      { date_from: { $gt: req.body.date_from } },
-                      { date_from: { $gt: req.body.date_to } }
-                  ]
-              },
-              {
-                  date_to: { $lt: req.body.date_from  },
-              }
-          ]
-      // }
-      // $gt > | $lt <
-  })
-  res.send(data);
-}
