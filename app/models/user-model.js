@@ -21,10 +21,15 @@ const schema = new mongoose.Schema({
     match: [/^(?=.*[A-Z]).*$/, 'password must include at least one uppercase charachter'],
     match: [/^(?=.*\W).*$/, 'password must include at least one symbol like (!,%,$,£,@,...)']
   },
-  status: {
+  role: {
     type: String,
-    default: "active",
+    enum: ['client', 'owner', 'admin'],
+    default: 'client',
+  },
+  isActive: {
+    type: Boolean,
+    default: true,
   },
 })
 
-module.exports = mongoose.model("clients", schema)
+module.exports = mongoose.model("users", schema)
