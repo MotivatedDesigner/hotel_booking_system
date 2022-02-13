@@ -26,11 +26,6 @@ const schema = new mongoose.Schema({
     enum: ['client', 'owner', 'admin'],
     default: 'client'
   },
-  status: {
-    type: String,
-    enum: ['client', 'owner', 'admin'],
-    default: 'client',
-  },
   isActive: {
     type: Boolean,
     default: true,
