@@ -1,8 +1,10 @@
-const clientController = require('./client-controller')
+const userController = require('./user-controller')
 const hotelController = require('./hotel-controller')
 const roomController = require('./room-controller')
+const reserveController = require('./reserve-controller')
 module.exports = {
   hotelController,
-  clientController,
+  userController,
+  reserveController,
   roomController,
 }

@@ -5,7 +5,9 @@ module.exports = {
   getAll,
   create,
   update,
-  remove
+  remove,
+  disponible
+
 }
 
 async function get(req, res) {
@@ -24,6 +26,9 @@ async function getAll(_, res) {
 
 async function create(req, res) {
   try {
+    req.body.image = req.files.map((file) => {
+      return file.filename
+    })
     const room = await roomModel.create(req.body)
     res.send(room)
   } catch (error) { res.send(error) }
@@ -42,3 +47,37 @@ async function remove(req, res) {
     res.send("is deleted")
   } catch (error) { res.send(error) }
 }
+
+
+async function disponible(req, res) {
+  try {
+  const room = await roomModel.aggregate([
+    {
+      $lookup: {
+        from: "reserves",
+        localField: "_id",
+        foreignField: "room",
+        as: "reserve",
+      },
+
+    },
+    {
+      $match: {
+        $or: [{
+        "reserve.date_from": 
+        { $gt: req.body.date_from, $gt: req.body.date_to }
+      },
+        {"reserve.date_to": { $lt: req.body.date_from}
+      },
+        { "reserve.room": {
+            $exists: false
+          }}
+        ]
+      }
+    },
+  ])
+    res.send(room)
+  } catch (error) { res.send(error) }
+}
+
+
