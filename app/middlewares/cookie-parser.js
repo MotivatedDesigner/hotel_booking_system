@@ -1,4 +1,4 @@
-module.exports = use((req, res, next) => {
+module.exports = (req, res, next) => {
 
   if(req.headers.cookie) {
     const { cookie: cookieHeader } = req.headers
@@ -13,4 +13,4 @@ module.exports = use((req, res, next) => {
       })
   }
   next()
-})
+}
