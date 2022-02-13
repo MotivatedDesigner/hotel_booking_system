@@ -21,6 +21,11 @@ const schema = new mongoose.Schema({
     match: [/^(?=.*[A-Z]).*$/, 'password must include at least one uppercase charachter'],
     match: [/^(?=.*\W).*$/, 'password must include at least one symbol like (!,%,$,£,@,...)']
   },
+  role: {
+    type: String,
+    enum: ['client', 'owner', 'admin'],
+    default: 'client'
+  },
   status: {
     type: String,
     default: "active",
