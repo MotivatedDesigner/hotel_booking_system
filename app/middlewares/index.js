@@ -1,8 +1,7 @@
 const allowed = require('./allowed')
-const authenticated = require('./isAuth')
+const isAuth = require('./isAuth')
 const upload= require('./uploadPhotos')
 module.exports = {
-    authenticated,
-    allowed,
+    isAuth,
     upload
 }
