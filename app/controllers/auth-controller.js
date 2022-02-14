@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 
+const config = require('../config')
+
 const {userModel} = require('../models')
 
 module.exports = {
@@ -11,14 +13,14 @@ module.exports = {
 
 function signup(req, res, next) {
   const user = new userModel({
-    ...req.budy,
+    ...req.body,
     password: bcrypt.hashSync(req.body.password, 8),
   })
-
   user.save((err, user) => {
+    console.log(err);
     if (err)
       return next({ message: err })
-    res.send({ message: "User was registered successfully!" , data: user})
+    res.json({ message: "User was registered successfully!" , data: user})
   })
 }
 
@@ -43,10 +45,10 @@ async function signin(req, res, next) {
       const accessToken = jwt.sign({ 
         id: user.id, 
         role: user.role 
-      }, app.authConfig.SECRET)
+      }, config.JWT_SECRET)
 
       res.cookie('access', accessToken, {
-        secure: app.appConfig.NODE_ENV == 'development' ? false : true,
+        secure: config.NODE_ENV == 'development' ? false : true,
         httpOnly: true,
         sameSite: 'lax'
       })
