@@ -2,15 +2,15 @@ const mongoose = require("mongoose");
 
 const reserveSchema = mongoose.Schema(
   {
-    // payment: {
-    //   type: String,
-    //   required: [true, "the payment field is required"],
-    //   enum: ["Cash", "Checks" , "Credit cards"],
-    //   validate: {
-    //     validator: (value) => ["Cash", "Checks" , "Credit cards"].includes(value),
-    //     message: 'Invalid payment type'
-    //   }
-    // },
+    payment: {
+      type: String,
+      required: [true, "the payment field is required"],
+      enum: ["Cash", "Checks" , "Credit cards"],
+      validate: {
+        validator: (value) => ["Cash", "Checks" , "Credit cards"].includes(value),
+        message: 'Invalid payment type'
+      }
+    },
     room: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'rooms'

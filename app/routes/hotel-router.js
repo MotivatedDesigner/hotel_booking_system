@@ -5,13 +5,10 @@ const { hotelController } = require("../controllers")
 const { upload , isAuth, is } = require("../middlewares");
 
 route.get("/find", hotelController.findByNameAndType);
+route.get("/annonce", hotelController.annonce);
+
 route.get("/", hotelController.getAll);
 route.get("/:id", hotelController.get);
-
-route.get("/annonce", 
-  [isAuth, is('admin', 'owner')],
-  hotelController.annonce
-)
 
 route.post("/",
   [isAuth, is('admin', 'owner')],

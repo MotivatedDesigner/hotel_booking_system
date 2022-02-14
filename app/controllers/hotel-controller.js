@@ -27,6 +27,7 @@ async function getAll(_, res) {
 
 async function create(req, res) {
   try {
+    req.body.user = req.user.id,
     req.body.image = req.files.map((file) => {
       return file.filename
     })
@@ -50,6 +51,7 @@ async function remove(req, res) {
 }
 
 async function annonce(req, res) {
+  console.log("hello");
   try {
     const hotel = await hotelModel.aggregate([
       {
@@ -119,7 +121,7 @@ async function findByNameAndType(req, res) {
                        { $eq: [ "$type",  req.body.type ]},
                }
             },
-            { $project: { _id: 0 } },
+            // { $project: { _id: 0 } },
           ]
       
         },

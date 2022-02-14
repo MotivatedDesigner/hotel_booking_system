@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
 const config = require('../config')
@@ -17,7 +17,6 @@ function signup(req, res, next) {
     password: bcrypt.hashSync(req.body.password, 8),
   })
   user.save((err, user) => {
-    console.log(err);
     if (err)
       return next({ message: err })
     res.json({ message: "User was registered successfully!" , data: user})
