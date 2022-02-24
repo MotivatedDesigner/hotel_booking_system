@@ -1,10 +1,10 @@
-const route = require('express').Router()
+const route = require("express").Router();
 
-const { authController } = require('../controllers')
+const { authController } = require("../controllers");
 
 // API
-route.post('/signin', authController.signin)
-route.post('/signup', authController.signup)
-route.post('/signout', authController.signout)
+route.post("/signin", authController.signin);
+route.post("/signup", authController.signup);
+route.post("/signout", authController.signout);
 
-module.exports = route
+module.exports = route;

@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-
 const hotelSchema = mongoose.Schema(
   {
     name: {
@@ -31,22 +30,24 @@ const hotelSchema = mongoose.Schema(
     //   required: [true, "the stars field is required"],
     //   maxlength: [100, "stars must be less than 100 charachter"],
     // },
-    image: [{
-      type: String,
-      required: true,
-    }],
+    image: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'users'
-  }
+      ref: "users",
+    },
   },
   { timestamps: true }
 );
 
 // hotelSchema.virtual('rooms', {
-//   ref: 'rooms', 
-//   localField: '_id', 
-//   foreignField: 'hotel', 
+//   ref: 'rooms',
+//   localField: '_id',
+//   foreignField: 'hotel',
 // });
 
 // hotelSchema.set('toObject', { virtuals: true });
