@@ -10,6 +10,12 @@ const {
 } = require("./app/routes");
 
 const app = express();
+const cors = require("cors");
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 // mongodb connection
 require("./app/database")();
@@ -25,6 +31,6 @@ app.use("/api/hotels", hotelRouter);
 app.use("/api/rooms", roomRouter);
 app.use("/api/reserves", reserveRouter);
 
-app.listen(3000, () =>
-  console.log("Server is running on http://localhost:3000")
+app.listen(4000, () =>
+  console.log("Server is running on http://localhost:4000")
 );
