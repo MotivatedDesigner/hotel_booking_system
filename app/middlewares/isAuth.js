@@ -3,7 +3,7 @@ const config = require('../config')
 
 module.exports = (req, res, next) => {
   if(!req.cookies['access'])
-    return res.send(404)
+    return res.send(403)
     
   const decodedUser = jwt.verify(req.cookies['access'], config.JWT_SECRET)
   
