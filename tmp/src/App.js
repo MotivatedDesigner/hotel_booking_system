@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { DropdownButton, Dropdown } from "react-bootstrap";
+
 import Logout from "./components/Logout";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
@@ -8,6 +10,7 @@ import Dashboard from "./components/Dashboard";
 import Profile from "./components/Profile";
 import { decodeToken } from "react-jwt";
 import { Cookies } from "react-cookie";
+import { BsFillPersonFill } from "react-icons/bs";
 import "./App.css";
 function App() {
   const cookies = new Cookies();
@@ -20,12 +23,12 @@ function App() {
   };
   useEffect(() => {
     setToken(cookies.get("access"));
-  },[]);
+  }, []);
   const decodedToken = decodeToken(token);
   return (
     <Router>
       <div className="App">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light ">
           <div className="container">
             <Link className="navbar-brand" to="/">
               Booking
@@ -33,29 +36,22 @@ function App() {
             <div className="float-right" id="navbarSupportedContent">
               {!decodedToken ? (
                 <>
-                  <Link to="/login">
-                    <button className="btn btn-outline-primary m-3">
-                      Login
-                    </button>
+                  <Link to="/login" className="link-primary text-decoration-none m-3">
+                    Login
                   </Link>
-                  <Link to="/signup">
-                    <button className="btn btn-outline-primary">Signup</button>
+                  <Link to="/signup" className="btn btn-outline-primary">
+                    Signup
                   </Link>
                 </>
               ) : (
-                <>
-                  <Link to="/profile">
-                    <button className="btn btn-outline-primary m-3">
-                      Profile
-                    </button>
-                  </Link>
-                  <button
-                    className="btn btn-outline-danger m-3"
-                    onClick={ShowPopup}
-                  >
-                    Logout
-                  </button>
-                </>
+                <DropdownButton
+                  id="dropdown-basic-button"
+                  variant="white"
+                  title={<BsFillPersonFill />}
+                >
+                  <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+                  <Dropdown.Item onClick={ShowPopup}>Logout</Dropdown.Item>
+                </DropdownButton>
               )}
             </div>
           </div>

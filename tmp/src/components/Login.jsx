@@ -5,11 +5,11 @@ import API from "../Api";
 export default function Login({ access }) {
   const [users, setUsers] = useState({});
   const navigate = useNavigate();
-  function handleInput(e) {
+  const handleInput =(e)=> {
     e.preventDefault();
     setUsers({ ...users, [e.target.name]: e.target.value });
   }
-  function handleSubmit(e) {
+  const handleSubmit =(e)=> {
     e.preventDefault();
     API.post(`auth/signin`, users ).then((res) => {
         if (res.status === 200) {
