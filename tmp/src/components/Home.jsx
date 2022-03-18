@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {Card ,Button, Carousel } from "react-bootstrap";
+import { Card, Carousel, OverlayTrigger ,Popover} from "react-bootstrap";
 import API from "../Api";
 
 function Home() {
@@ -10,72 +10,77 @@ function Home() {
     });
   }, []);
 
-  console.log(annonces);
-
   return (
-    <div className="m-auto">
-      {annonces.map((val, key) => {
+    <div >
+      {annonces.map((val, key1) => {
         return (
-          <Card className="text-center" key={key}>
-            {/* <Card.Header>{val.name}</Card.Header> */}
-            <Card.Body>
-              <Card.Title> {val.name}</Card.Title>
-              <Card.Text>{val.adresse + " " + val.city}</Card.Text>
-              <div className="row gap-3">
-                <Carousel className="col-md " fade>
-                  {val.image.map((img) => {
-                    return (
-                      <Carousel.Item>
-                        <img
-                          className="w-100"
-                          src={process.env.PUBLIC_URL + "/images/" + img}
-                          alt="slide"
-                        />
-                      </Carousel.Item>
-                    );
-                  })}
-                </Carousel >
-                {/* <Carousel className="col-md"> */}
-                <div className="col-md row gap-3 ">
-                  <h2>Rooms</h2>
-                  {val.room.map((room, key) => {
-                    return (
-                      // <Carousel.Item>
-                        <Card className="col-5" key={key}>
-                          <Card.Body>
-                    
-                          <Carousel fade>
-                            {room.image.map((image) => {
-                              return (
-                                <Carousel.Item>
-                                  <img
-                                    className="w-100"
-                                    src={
-                                      process.env.PUBLIC_URL +
-                                      "/images/" +
-                                      image
-                                    }
-                                    alt="slide"
-                                  />
-                                </Carousel.Item>
-                              );
-                            })}
-                          </Carousel>
-                          <Card.Title> {room.type}</Card.Title>
-                        <Card.Text>{ room.price}</Card.Text>
-                          <Button variant="primary">Go somewhere</Button>
-            </Card.Body>
+          <Carousel key={key1} >
+            {val.image.map((img, key2) => {
+              return (
+                <Carousel.Item key={key2}>
+                  <img
+                    className="w-100 hotel-images"
+                    src={process.env.PUBLIC_URL + "/images/" + img}
+                    alt="slide"
+                  />
+                  <Carousel.Caption className="row gap-1 ">
+                    <h2 className=" ">{val.name}</h2>
+                    <h3>{val.adresse + " " + val.city}</h3>
+                    {val.room.map((room, key3) => {
+                      return (
+                        <OverlayTrigger
+                        placement="right"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={    <Popover >
+                        <Popover.Body>
+                          {room.image.map((roomImg ,key4)=>{
+                            return(
+                              <img
+                              key={key4}
+                              className="w-50"
+                              src={process.env.PUBLIC_URL + "/images/" + roomImg}
+                              alt="slide"
+                            /> 
+                            )
+                          })}
+                          {/* <Button variant="primary ">See Room</Button> */}
+                        </Popover.Body>
+                      </Popover>}
+                      >
+                        <Card
+                          className="col-3 bg-transparent border-0"
+                          key={key3}
+                          fade
+                        >
+                          <Card.Img
+                            variant="top"
+                            src={
+                              process.env.PUBLIC_URL +
+                              "/images/" +
+                              room.image[0]
+                            }
+                            alt="slide"
+                          />
+                          <Card.ImgOverlay className="d-none d-lg-block">
+                            <Card.Title>
+                              Type :<strong>{room.type}</strong>
+                            </Card.Title>
+                            <Card.Text>
+                              Price :<strong>{room.price} Dh</strong>
+                            </Card.Text>                          
+                            {/* <Button variant="primary ">See Room</Button> */}
+                          </Card.ImgOverlay>
                         </Card>
-                      // </Carousel.Item>
-                    );
-                  })}
-                  </div>
-                {/* </Carousel> */}
-              </div>
-              <Button variant="info">Go somewhere</Button>
-            </Card.Body>
-            {/* <Card.Footer className="text-muted">2 days ago</Card.Footer> */}
-          </Card>
+                        </OverlayTrigger>
+                      );
+                    })}
+
+                    {/* <Button variant="info mt-2">See Hotel</Button> */}
+                  </Carousel.Caption>
+                </Carousel.Item>
+              );
+            })}
+          </Carousel>
         );
       })}
     </div>
