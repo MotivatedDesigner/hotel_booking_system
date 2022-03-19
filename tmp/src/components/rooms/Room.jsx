@@ -11,15 +11,29 @@ import UpdateRoom from "./UpdateRoom";
 import AddRoom from "./AddRoom";
 
 function Room({ role, userId }) {
+  const [DeleteId, setDeleteId] = useState('');
+  const [updatedRoom, setupdatedRoom] = useState('');
   const [showAdd, setShowAdd] = useState(false);
   const ShowAddPopup = () => setShowAdd(true);
   const CloseAddPopup = () => setShowAdd(false);
   const [showDelete, setShowDelete] = useState(false);
-  const ShowDeletePopup = () => setShowDelete(true);
-  const CloseDeletePopup = () => setShowDelete(false);
+  const ShowDeletePopup = (id) => {
+    setDeleteId(id);
+    setShowDelete(true);
+  };
+  const CloseDeletePopup = () => {
+    setDeleteId('');
+    setShowDelete(false);
+  };
   const [showUpdate, setShowUpdate] = useState(false);
-  const ShowUpdatePopup = () => setShowUpdate(true);
-  const CloseUpdatePopup = () => setShowUpdate(false);
+  const ShowUpdatePopup = (room) => {
+    setupdatedRoom(room);
+    setShowUpdate(true);
+  };
+  const CloseUpdatePopup = () => {
+    setupdatedRoom('');
+    setShowUpdate(false);
+  };
   const [rooms, setRooms] = useState([]);
   const [hotels, sethotels] = useState([]);
 
@@ -38,7 +52,7 @@ function Room({ role, userId }) {
         sethotels(response.data);
       }
     });
-  }, [role, userId]);
+  }, [role, userId,hotels]);
   useEffect(() => {
     API.get(`rooms`).then((res) => {
       if (role === "admin") {
@@ -75,10 +89,9 @@ function Room({ role, userId }) {
           </tr>
         </thead>
         <tbody>
-          {rooms.map((room) => {
+          {rooms.map((room ,key) => {
             return (
-              <>
-                <tr key={room._id}>
+                <tr key={key}>
                   <td>{room.number}</td>
                   <td>{room.type}</td>
                   <td>{room.price} Dh</td>
@@ -87,28 +100,29 @@ function Room({ role, userId }) {
                   <td>
                     <BsFillTrashFill
                       className="m-2"
-                      onClick={ShowDeletePopup}
+                      onClick={() => ShowDeletePopup(room._id)}
                     />
-                    <BsArrowRepeat className="m-2" onClick={ShowUpdatePopup} />
+                    <BsArrowRepeat
+                      className="m-2"
+                      onClick={() => ShowUpdatePopup(room)}
+                    />
                   </td>
                 </tr>
-                <UpdateRoom
-                  showUpdate={showUpdate}
-                  CloseUpdatePopup={CloseUpdatePopup}
-                  id={room._id}
-                  hotels={hotels}
-                />
-                <DeleteRoom
-                  showDelete={showDelete}
-                  CloseDeletePopup={CloseDeletePopup}
-                  id={room._id}
-                />
-              </>
             );
           })}
         </tbody>
       </Table>
-
+      <UpdateRoom
+        showUpdate={showUpdate}
+        CloseUpdatePopup={CloseUpdatePopup}
+        hotels={hotels}
+        updatedRoom={updatedRoom}
+      />
+      <DeleteRoom
+        showDelete={showDelete}
+        CloseDeletePopup={CloseDeletePopup}
+        id={DeleteId}
+      />
       <AddRoom
         showAdd={showAdd}
         CloseAddPopup={CloseAddPopup}
