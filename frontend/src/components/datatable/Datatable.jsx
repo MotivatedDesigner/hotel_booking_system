@@ -1,6 +1,6 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows } from "../../datatablesource";
+import { hotelColumns, userRows } from "../../datatablesource";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -18,16 +18,16 @@ const Datatable = () => {
       width: 200,
       renderCell: (params) => {
         return (
-          <div className="cellAction">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
+          <div className="cell-action">
+            <Link to={'/hotels/view/'+params.row.id} className="link">
               <div className="viewButton">View</div>
             </Link>
-            <div
-              className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
-            >
-              Delete
-            </div>
+            <Link to={'/hotels/edit/'+params.row.id} className="link">
+              <div className="editButton">Edit</div>
+            </Link>
+            <Link to={'/hotels/'+params.row.id} className="link">
+              <div className="deleteButton">Delete</div>
+            </Link>
           </div>
         );
       },
@@ -44,9 +44,9 @@ const Datatable = () => {
       <DataGrid
         className="datagrid"
         rows={data}
-        columns={userColumns.concat(actionColumn)}
-        pageSize={9}
-        rowsPerPageOptions={[9]}
+        columns={hotelColumns.concat(actionColumn)}
+        pageSize={10}
+        rowsPerPageOptions={[10]}
       />
     </div>
   );

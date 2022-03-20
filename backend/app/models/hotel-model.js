@@ -13,12 +13,6 @@ module.exports = mongoose.model(
     //   type: mongoose.Schema.Types.ObjectId,
     //   ref: 'users'
     // },
-    city: {
-      type: String,
-      required: [true, "the city field is required"],
-      minlength: [3, "city must be greater than 3 character"],
-      maxlength: [24, "city must be less than 24 character"],
-    },
     address: {
       type: String,
       required: [true, "the address field is required"],
