@@ -1,3 +1,5 @@
+import * as Yup from 'yup'
+
 export const hotelInputs = [
   {
     id: 1,
@@ -41,3 +43,21 @@ export const hotelInputs = [
     placeholder: "USA",
   },
 ]
+
+export const newHotelSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(3, 'Too Short!')
+    .max(24, 'Too Long!')
+    .required('Required'),
+  address: Yup.string()
+  .max(100, 'Too Long!')
+  .required('Required'),
+  phone: Yup.string()
+    .min(8, 'Too Short!')
+    .max(24, 'Too Long!')
+    .required('Required'),
+  stars: Yup.string()
+  .min(1, 'Too Short!')
+  .max(5, 'Too Long!')
+  .required('Required'),
+})

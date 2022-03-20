@@ -9,7 +9,7 @@ import New from "./pages/new/New"
 import Sidebar from "./components/sidebar/Sidebar"
 import Navbar from "./components/navbar/Navbar"
 // forms input
-import { hotelInputs } from "./utils/formSource";
+import { hotelInputs, newHotelSchema } from "./utils/formSource";
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
                 {/* <Route path=":hotelId" element={<Single />} /> */}
                 <Route
                   path="new"
-                  element={ <New inputs={hotelInputs} title="Add New Hotel" /> }
+                  element={ <New inputs={hotelInputs} schema={newHotelSchema} title="Add New Hotel" /> }
                 />
               </Route>
             </Route>
