@@ -1,9 +1,12 @@
-import "./datatable.scss";
-import { DataGrid } from "@mui/x-data-grid";
-import { hotelColumns } from "../../datatablesource";
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import "./datatable.scss"
+
+import { DataGrid } from "@mui/x-data-grid"
+import { hotelColumns } from "../../datatablesource"
+
+import { Link } from "react-router-dom"
+import { useState, useEffect } from "react"
 import axios from 'axios'
+
 const Datatable = () => {
   const [data, setData] = useState([])
 
@@ -14,7 +17,6 @@ const Datatable = () => {
         .catch(err => {  console.log(err); return })
 
       setData( res.data.map(row => ({...row, id: row._id})) )
-      // console.log(data);
     })()
   }, [])
 
@@ -26,20 +28,20 @@ const Datatable = () => {
       renderCell: (params) => {
         return (
           <div className="cell-action">
-            <Link to={'/hotels/view/'+params.row.id} className="link">
+            <Link to={'/hotels/'+params.row.id} className="link">
               <div className="viewButton">View</div>
             </Link>
-            <Link to={'/hotels/edit/'+params.row.id} className="link">
+            <Link to={'/hotels/'+params.row.id+'/edit'} className="link">
               <div className="editButton">Edit</div>
             </Link>
             <Link to={'/hotels/'+params.row.id} className="link">
               <div className="deleteButton">Delete</div>
             </Link>
           </div>
-        );
+        )
       },
     },
-  ];
+  ]
   
   return (
     <div className="datatable">
@@ -57,7 +59,7 @@ const Datatable = () => {
         rowsPerPageOptions={[10]}
       />
     </div>
-  );
-};
+  )
+}
 
-export default Datatable;
+export default Datatable
