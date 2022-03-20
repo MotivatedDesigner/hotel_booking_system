@@ -9,10 +9,11 @@ module.exports = mongoose.model(
       minlength: [3, "name must be greater than 3 character"],
       maxlength: [24, "name must be less than 24 character"],
     },
-    // user: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: 'users'
-    // },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'users',
+      required: [true, "the user field is required"]
+    },
     address: {
       type: String,
       required: [true, "the address field is required"],

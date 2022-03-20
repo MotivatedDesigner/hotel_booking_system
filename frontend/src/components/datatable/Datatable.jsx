@@ -1,15 +1,22 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { hotelColumns, userRows } from "../../datatablesource";
+import { hotelColumns } from "../../datatablesource";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import axios from 'axios'
 const Datatable = () => {
-  const [data, setData] = useState(userRows);
+  const [data, setData] = useState([])
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
-  };
+  useEffect(() => {
+    (async () => {
+      const res = await axios
+        .get('http://localhost:9000/api/hotels')
+        .catch(err => {  console.log(err); return })
+
+      setData( res.data.map(row => ({...row, id: row._id})) )
+      // console.log(data);
+    })()
+  }, [])
 
   const actionColumn = [
     {
@@ -33,6 +40,7 @@ const Datatable = () => {
       },
     },
   ];
+  
   return (
     <div className="datatable">
       <div className="datatableTitle">

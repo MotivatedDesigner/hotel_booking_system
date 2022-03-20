@@ -1,16 +1,18 @@
 import StarIcon from '@mui/icons-material/Star';
+import { Link } from "react-router-dom";
 
 export const hotelColumns = [
-  { field: "id", headerName: "ID", width: 60 },
+  // { field: "id", headerName: "ID", width: 240 },
   {
     field: "name",
     headerName: "Name",
-    width: 160
+    width: 180
   },
   {
     field: "email",
     headerName: "Email",
-    width: 200
+    width: 220,
+    renderCell: (params) =>  <Link to={'/users/'+params.row.user?._id} >{params.row.user?.email}</Link>
   },
   {
     field: "address",

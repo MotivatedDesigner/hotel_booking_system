@@ -1,3 +1,4 @@
+const cors = require('cors')
 const express = require('express')
 
 const { userRouter, hotelRouter } = require('./app/routes')
@@ -7,6 +8,7 @@ const app = express()
 // mongodb connection
 require('./app/database')()
 
+app.use(cors())
 app.use(express.json())
 
 // routers

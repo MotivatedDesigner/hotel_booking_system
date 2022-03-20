@@ -17,7 +17,7 @@ async function get(req, res) {
 
 async function getAll(_, res) {
   try {
-    const hotel = await hotelModel.find()
+    const hotel = await hotelModel.find().populate('user', 'email')
     res.send(hotel)
   } catch (error) { res.send(error) }
 }
