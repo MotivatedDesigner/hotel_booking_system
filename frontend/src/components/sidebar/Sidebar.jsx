@@ -8,6 +8,7 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import HouseSidingIcon from '@mui/icons-material/HouseSiding';
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
@@ -28,7 +29,7 @@ const Sidebar = () => {
           <p className="title">LISTS</p>
           <Link to="/users" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineIcon className="icon" />
+              <HouseSidingIcon className="icon" />
               <span>Hotels</span>
             </li>
           </Link>
