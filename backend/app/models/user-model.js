@@ -16,11 +16,11 @@ module.exports = mongoose.model(
     password: {
       type: String,
       required: [true, "the password field is required"],
-      minlength: [8, 'password must be greater than 8 charachter'],
-      maxlength: [24, 'password must be less than 24 charachter'],
+      minlength: [8, 'password must be greater than 8 character'],
+      maxlength: [24, 'password must be less than 24 character'],
       match: [/^(?=.*\d).*/, 'password must include at least one number'],
-      match: [/^(?=.*[a-z]).*$/, 'password must include at least one lowercase charachter'],
-      match: [/^(?=.*[A-Z]).*$/, 'password must include at least one uppercase charachter'],
+      match: [/^(?=.*[a-z]).*$/, 'password must include at least one lowercase character'],
+      match: [/^(?=.*[A-Z]).*$/, 'password must include at least one uppercase character'],
       match: [/^(?=.*\W).*$/, 'password must include at least one symbol like (!,%,$,£,@,...)']
     },
     role: {
