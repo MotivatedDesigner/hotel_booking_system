@@ -1,9 +1,7 @@
 .sidebar {
   width: fit-content;
-  border-right: 0.5px solid rgb(230, 227, 227);
-  min-height: 100vh;
   background-color: white;
-
+  min-height: 100%;
   .top {
     height: 50px;
     display: flex;

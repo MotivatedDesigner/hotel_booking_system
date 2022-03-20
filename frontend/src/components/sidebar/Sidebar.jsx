@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <div className="sidebar">
+    <aside className="sidebar">
       <div className="top">
         <Link to="/" style={{ textDecoration: "none" }}>
           <span className="logo">BOOKING</span>
@@ -66,7 +66,7 @@ const Sidebar = () => {
           </li>
         </ul>
       </div>
-    </div>
+    </aside>
   );
 };
 
