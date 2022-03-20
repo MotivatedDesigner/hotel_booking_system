@@ -4,7 +4,7 @@
   align-items: center;
   font-size: 14px;
   color: #555;
-
+  box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%);
   .wrapper {
     width: 100%;
     padding: 20px;
@@ -32,7 +32,7 @@
     .items {
       display: flex;
       align-items: center;
-      
+
       .item {
         display: flex;
         align-items: center;

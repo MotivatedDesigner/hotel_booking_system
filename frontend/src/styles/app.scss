@@ -2,6 +2,9 @@
   display: flex;
   min-height: 100vh;
   main{
+    flex: 6;
+  }
+  aside{
     flex: 1;
   }
 }

@@ -1,7 +1,7 @@
 .sidebar {
-  width: fit-content;
   background-color: white;
   min-height: 100%;
+  box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%);
   .top {
     height: 50px;
     display: flex;
@@ -16,7 +16,7 @@
   }
 
   .center {
-    padding: 0 2rem 0 1rem;
+    padding-left: 1rem;
 
     ul {
       list-style: none;
