@@ -1,5 +1,5 @@
 .sidebar {
-  flex: 1;
+  width: fit-content;
   border-right: 0.5px solid rgb(230, 227, 227);
   min-height: 100vh;
   background-color: white;
@@ -17,13 +17,8 @@
     }
   }
 
-  hr {
-    height: 0;
-    border: 0.5px solid rgb(230, 227, 227);
-  }
-
   .center {
-    padding-left: 10px;
+    padding: 0 2rem 0 1rem;
 
     ul {
       list-style: none;
