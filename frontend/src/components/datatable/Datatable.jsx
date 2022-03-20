@@ -1,7 +1,7 @@
 import "./datatable.scss"
 
 import { DataGrid } from "@mui/x-data-grid"
-import { hotelColumns } from "../../datatablesource"
+import { hotelColumns } from "../../utils/datatablesource"
 
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
