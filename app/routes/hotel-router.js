@@ -12,7 +12,7 @@ route.get("/:id", hotelController.get);
 
 route.post(
   "/",
-  [isAuth, is("admin", "owner")],
+  // [isAuth, is("admin", "owner")],
   upload.array("image"),
   hotelController.create
 );

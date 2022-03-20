@@ -29,13 +29,11 @@ async function getAll(_, res) {
 }
 
 async function create(req, res) {
+  console.log(req.body);
   try {
-    (req.body.user = req.user.id),
-      (req.body.image = req.files.map((file) => {
-        return file.filename;
-      }));
+ 
     const hotel = await hotelModel.create(req.body);
-    res.send(hotel);
+    res.json(hotel);
   } catch (error) {
     res.send(error);
   }
