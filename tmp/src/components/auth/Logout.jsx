@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import API from "../Api";
+import API from "../../Api";
 function Logout({ show, ClosePopup, access }) {
   const navigate = useNavigate();
   const logout = () => {
