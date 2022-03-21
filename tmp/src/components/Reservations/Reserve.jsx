@@ -81,7 +81,7 @@ function Reserve({ role, userId }) {
   return (
     <div className="w-100">
       <h3 className="m-3">
-        Reserves
+        Reservations
         <Button className="float-end" onClick={ShowAddPopup}>
           Add <BsPlusSquareFill className="m-1" />
         </Button>
