@@ -57,7 +57,5 @@ export const newHotelSchema = Yup.object().shape({
     .max(24, 'Too Long!')
     .required('Required'),
   stars: Yup.string()
-  .min(1, 'Too Short!')
-  .max(5, 'Too Long!')
   .required('Required'),
 })

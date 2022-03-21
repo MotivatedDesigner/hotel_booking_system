@@ -10,8 +10,10 @@ import Sidebar from "./components/sidebar/Sidebar"
 import Navbar from "./components/navbar/Navbar"
 // forms input
 import { hotelInputs, newHotelSchema } from "./utils/formSource";
-
+import { useState } from "react";
 function App() {
+  const [showToast, setShowToast] = useState(false)
+
   return (
     <div className="app">
       <BrowserRouter>
@@ -23,11 +25,11 @@ function App() {
               <Route index element={<Home />} />
               {/* <Route path="login" element={<Login />} /> */}
               <Route path="hotels">
-                <Route index element={<List />} />
+                <Route index element={<List showToast={showToast}/>} />
                 {/* <Route path=":hotelId" element={<Single />} /> */}
                 <Route
                   path="new"
-                  element={ <New inputs={hotelInputs} schema={newHotelSchema} title="Add New Hotel" /> }
+                  element={ <New setShowToast={setShowToast} inputs={hotelInputs} schema={newHotelSchema} title="Add New Hotel" /> }
                 />
               </Route>
             </Route>

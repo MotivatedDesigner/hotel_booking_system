@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import axios from "axios"
 
-const New = ({ inputs, title, schema }) => {
+const New = ({ setShowToast, title, schema }) => {
   // const [file, setFile] = useState("")
   const navigate = useNavigate()
   const submitHandler = async values => {
@@ -18,8 +18,8 @@ const New = ({ inputs, title, schema }) => {
         user: "620a21ed929707b15d27eee8"
       })
       .catch(err => {console.log(err); return})
-
-      navigate('/hotels',{state: 'success'})
+      setShowToast(true)
+      navigate('/hotels')
   }
   return (
     <div className="newContainer">
