@@ -30,20 +30,22 @@ const List = ({showToast}) => {
 
   const deleteHandler = async hotelId => {
     MySwal.fire({
-      title: <p>Hello World</p>,
-      footer: 'Copyright 2018',
-      didOpen: () => {
-        MySwal.clickConfirm()
-        MySwal.clickCancel()
-      }
-    }).then(() => {
-      return MySwal.fire(<p>Shorthand works too</p>)
-    })
-    await axios
-      .delete(`http://localhost:9000/api/hotels/${hotelId}`)
-      .catch(err => {  console.log(err); return })
+      title: 'Do you Really wanna Delete this Hotel ?',
+      showDenyButton: true,
+      showCancelButton: true,
+      showConfirmButton: false,
+      denyButtonText: `Delete`,
+    }).then(async (result) => {
+      if (result.isDenied) 
+      {
+        MySwal.fire('Removed!', '', 'success')
+        await axios
+          .delete(`http://localhost:9000/api/hotels/${hotelId}`)
+          .catch(err => {  console.log(err); return })
 
-    setData( data.filter(row => row._id != hotelId) )
+        setData( data.filter(row => row._id != hotelId) )
+      }
+    })
   }
 
   return (
