@@ -16,10 +16,7 @@ const Datatable = ({data, deleteHandler}) => {
       renderCell: (params) => {
         return (
           <div className="cell-action">
-            <Link to={'/hotels/'+params.row.id} className="link">
-              <div className="viewButton">View</div>
-            </Link>
-            <Link to={'/hotels/'+params.row.id+'/edit'} className="link">
+            <Link to={'/hotels/edit/'+params.row.id} className="link">
               <div className="editButton">Edit</div>
             </Link>
             <a onClick={() => deleteHandler(params.row.id)} className="link">

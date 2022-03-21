@@ -5,6 +5,7 @@ import "./styles/index.scss"
 import Home from "./pages/home/Home"
 import List from "./pages/list/List"
 import New from "./pages/new/New"
+import Edit from "./pages/edit/Edit"
 // components
 import Sidebar from "./components/sidebar/Sidebar"
 import Navbar from "./components/navbar/Navbar"
@@ -13,6 +14,7 @@ import { hotelInputs, newHotelSchema } from "./utils/formSource";
 import { useState } from "react";
 function App() {
   const [showToast, setShowToast] = useState(false)
+  const [data, setData] = useState([])
 
   return (
     <div className="app">
@@ -23,13 +25,15 @@ function App() {
           <Routes>
             <Route path="/">
               <Route index element={<Home />} />
-              {/* <Route path="login" element={<Login />} /> */}
               <Route path="hotels">
-                <Route index element={<List showToast={showToast}/>} />
-                {/* <Route path=":hotelId" element={<Single />} /> */}
+                <Route index element={<List toastify={{ showToast, setShowToast }} ctx={{ data, setData }}/>} />
                 <Route
                   path="new"
-                  element={ <New setShowToast={setShowToast} inputs={hotelInputs} schema={newHotelSchema} title="Add New Hotel" /> }
+                  element={ <New ctx={{ data, setData }} setShowToast={setShowToast} inputs={hotelInputs} schema={newHotelSchema} title="Add New Hotel" /> }
+                />
+                <Route
+                  path="edit/:hotelId"
+                  element={ <Edit data={data} setShowToast={setShowToast} inputs={hotelInputs} schema={newHotelSchema} title="Edit Hotel" /> }
                 />
               </Route>
             </Route>

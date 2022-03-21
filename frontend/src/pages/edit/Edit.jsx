@@ -6,22 +6,23 @@ import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUpload
 import { useNavigate, useParams  } from "react-router-dom"
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import axios from "axios"
-const New = ({ setShowToast, title, schema, ctx }) => {
+
+const Edit = ({ setShowToast, title, schema, data }) => {
   const navigate = useNavigate()
   const { hotelId } = useParams()
-
+  const hotel = data.find(dt => dt._id == hotelId)
   const submitHandler = async values => {
-    const hotel = {
+    const hotel ={
       ...values,
       user: "620a21ed929707b15d27eee8"
     }
 
-    const res = await axios
-      .post('http://localhost:9000/api/hotels', hotel)
+    await axios
+      .patch('http://localhost:9000/api/hotels/'+hotelId, hotel)
       .catch(err => {console.log(err); return})
-    setShowToast('Added')
+
+    setShowToast('Updated')
     navigate('/hotels')
-    ctx.setData([...ctx.data, {...res.data, id: res.data._id}])
   }
 
   return (
@@ -35,10 +36,10 @@ const New = ({ setShowToast, title, schema, ctx }) => {
         <div className="right">
           <Formik
             initialValues={{
-              name: '',
-              address: '',
-              phone: '',
-              stars: 5,
+              name: hotel.name,
+              address: hotel.address,
+              phone: hotel.phone,
+              stars: hotel.stars,
             }}
             validationSchema={schema}
             onSubmit={submitHandler}
@@ -81,4 +82,4 @@ const New = ({ setShowToast, title, schema, ctx }) => {
   );
 };
 
-export default New;
+export default Edit;
