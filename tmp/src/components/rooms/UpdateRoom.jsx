@@ -15,13 +15,13 @@ function UpdateRoom({ CloseUpdatePopup, showUpdate, updatedRoom, hotels }) {
 
   const handelSubmit = async (e) => {
     // e.preventDefault();
-    console.log('newroom',newroom);
+    // console.log('newroom',newroom);
     // const data = new FormData();
-    // data.append("number", room.number);
-    // data.append("price", room.price);
-    // data.append("type", room.type);
+    // data.append("number", newroom.number);
+    // data.append("price", newroom.price);
+    // data.append("type", newroom.type);
     // images.map((image) => data.append("image", image));
-    // data.append("hotel", room.hotel);
+    // data.append("hotel", newroom.hotel);
 
     try {
       const res = await API.patch(`rooms/${updatedRoom._id}`,newroom);
@@ -100,7 +100,7 @@ function UpdateRoom({ CloseUpdatePopup, showUpdate, updatedRoom, hotels }) {
               className="form-control mt-2"
               onChange={(e)=>handelChange(e)}
             >
-              <option value={updatedRoom.hotel && updatedRoom.hotel.name}>{updatedRoom.hotel && updatedRoom.hotel.name}</option>
+              <option value={updatedRoom.hotel?._id}>{updatedRoom.hotel?.name}</option>
               {hotels.map((hotel) => {
                 return (
                   <option key={hotel._id} value={hotel._id}>

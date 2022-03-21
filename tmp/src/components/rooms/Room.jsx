@@ -96,7 +96,7 @@ function Room({ role, userId }) {
                   <td>{room.type}</td>
                   <td>{room.price} Dh</td>
                   <td>{new Date(room.updatedAt).toLocaleDateString()}</td>
-                  <td>{room.hotel && room.hotel.name}</td>
+                  <td>{room.hotel?.name}</td>
                   <td>
                     <BsFillTrashFill
                       className="m-2"

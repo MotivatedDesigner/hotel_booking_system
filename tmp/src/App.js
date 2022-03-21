@@ -5,6 +5,7 @@ import Logout from "./components/auth/Logout";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Room from "./components/rooms/Room";
+import Reserve from "./components/Reservations/Reserve";
 import Home from "./components/Home";
 import SideBar from "./components/SideBar";
 import Profile from "./components/Profile";
@@ -71,7 +72,7 @@ function App() {
         <div className="d-flex min-height">
           {decodedToken && <SideBar role={decodedToken.role}  />}
           <Routes>
-            <Route exact path="/" element={<Home />}></Route>
+            <Route exact path="/" element={<Home log={decodedToken} />}></Route>
             <Route
               exact
               path="/login"
@@ -83,8 +84,10 @@ function App() {
               element={<Signup access={access} />}
             ></Route>
             {decodedToken && (<>
-              <Route exact path="/profile" element={<Profile />}></Route>
+              <Route exact path="/profile" element={<Profile log={decodedToken}/>}></Route>
               <Route exact path="/rooms" element={<Room role={decodedToken.role} userId={decodedToken.id} />}></Route>
+              <Route exact path="/reserve" element={<Reserve role={decodedToken.role} userId={decodedToken.id} />}></Route>
+
               </>
             )}
           </Routes>

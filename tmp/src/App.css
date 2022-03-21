@@ -1,7 +1,9 @@
 .logo{
   max-width:90px;
-  /* max-height: 50px; */
 }
 .min-height{
   min-height: 560px;
+}
+.hotel-images{
+  max-height: 650px;
 }
