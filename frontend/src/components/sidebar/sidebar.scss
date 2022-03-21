@@ -1,13 +1,13 @@
 .sidebar {
   background-color: white;
   min-height: 100%;
-  box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%);
-  .top {
+  // box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%);
+  .top-side {
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-
+    padding-top: 1rem;
     .logo {
       font-size: 20px;
       font-weight: bold;

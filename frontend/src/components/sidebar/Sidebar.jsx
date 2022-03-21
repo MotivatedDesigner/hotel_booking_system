@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 const Sidebar = () => {
   return (
     <aside className="sidebar">
-      <div className="top">
+      <div className="top-side">
         <Link to="/" style={{ textDecoration: "none" }}>
           <span className="logo">BOOKING</span>
         </Link>

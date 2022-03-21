@@ -4,12 +4,13 @@ import "./new.scss"
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined"
 // library
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import * as Yup from 'yup'
 import axios from "axios"
 
 const New = ({ inputs, title, schema }) => {
   // const [file, setFile] = useState("")
+  const navigate = useNavigate()
   const submitHandler = async values => {
     const res = await axios
       .post('http://localhost:9000/api/hotels',{
@@ -18,7 +19,7 @@ const New = ({ inputs, title, schema }) => {
       })
       .catch(err => {console.log(err); return})
 
-      console.log(res);
+      navigate('/hotels',{state: 'success'})
   }
   return (
     <div className="newContainer">
