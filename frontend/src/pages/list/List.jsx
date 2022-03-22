@@ -13,7 +13,6 @@ import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
 
 const List = ({toastify, ctx}) => {
-  console.log(ctx.data);
   if(toastify.showToast) {
     toast.success(`Hotel ${toastify.showToast} successfully`,{toastId: "success1"})
     toastify.setShowToast(false)
