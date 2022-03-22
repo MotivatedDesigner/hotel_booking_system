@@ -5,3 +5,10 @@ export default axios.create({
   withCredentials: true
   
 });
+
+const userUrl = `http://localhost:4000/api/users`
+
+export const getUserById = async (id) => {
+  id = id || '';
+  return await axios.get(`${userUrl}/${id}`);
+};

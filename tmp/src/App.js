@@ -78,7 +78,7 @@ function App() {
             element={<Signup access={access} />}
           ></Route>
           {decodedToken && (
-            <Route exact path="/profile" element={<Profile />}></Route>
+            <Route exact path="/profile" element={<Profile log={decodedToken.id} />}></Route>
           )}
         </Routes>
         <Logout show={show} ClosePopup={ClosePopup} access={access} />
