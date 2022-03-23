@@ -1,0 +1,67 @@
+.datatable {
+  height: 600px;
+  padding: 20px;
+  
+  .datatableTitle{
+    width: 100%;
+    font-size: 24px;
+    color: gray;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    // justify-content: space-between;
+
+    .link{
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      font-weight: 400;
+      padding: .4rem .8rem;
+      border-radius: 5px;
+      background-color: var(--primary-clr);
+      cursor: pointer;
+    }
+  }
+
+  .datagrid{
+    background: white;
+    box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%);
+  }
+
+  .cell-with-stars {
+    color: rgb(218, 218, 53);
+    svg{
+      height: 16px;
+      width: 16px;
+    }
+  }
+
+  .cell-action {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    div{
+      padding: 2px 5px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .viewButton {
+      color: darkblue;
+      border: 1px dotted rgba(0, 0, 139, 0.596);
+    }
+
+    .editButton {
+      color: rgb(0, 139, 63);
+      border: 1px dotted rgba(0, 139, 63, 0.596);
+    }
+    
+    .deleteButton {
+      color: crimson;
+      border: 1px dotted rgba(220, 20, 60, 0.6);
+    }
+  }
+}
