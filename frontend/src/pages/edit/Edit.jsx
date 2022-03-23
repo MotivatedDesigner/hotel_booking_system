@@ -11,6 +11,7 @@ const Edit = ({ setShowToast, title, schema, data }) => {
   const navigate = useNavigate()
   const { hotelId } = useParams()
   const hotel = data.find(dt => dt._id == hotelId)
+  
   const submitHandler = async values => {
     const hotel ={
       ...values,

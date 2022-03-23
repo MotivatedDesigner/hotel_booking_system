@@ -6,12 +6,14 @@ import Home from "./pages/home/Home"
 import List from "./pages/list/List"
 import New from "./pages/new/New"
 import Edit from "./pages/edit/Edit"
+
 // components
 import Sidebar from "./components/sidebar/Sidebar"
 import Navbar from "./components/navbar/Navbar"
 // forms input
 import { hotelInputs, newHotelSchema } from "./utils/formSource";
 import { useState } from "react";
+
 function App() {
   const [showToast, setShowToast] = useState(false)
   const [data, setData] = useState([])
