@@ -1,0 +1,19 @@
+  version: "3.8"
+  services:
+    hotel-booking-db:
+      image: "mongo"
+      volumes:
+        - hotel-booking-db:/data/db
+      container_name: hotel-booking-db
+    hotel-booking:
+      build: .
+      ports:
+        - "9000:9000"
+      volumes:
+        - C:\Users\ORIGINAL\Desktop\clone\hotel_booking_system\backend:/app
+        - /app/node_modules
+      container_name: hotel-booking-app
+      depends_on:
+        - hotel-booking-db
+  volumes:
+    hotel-booking-db:
